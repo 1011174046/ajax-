@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        //ajax是异步
+        // 太底层
+        // $.ajax({
+        //     url:'./a.json',
+        //     type:'GET',
+        //     // dataType:'json',
+        //     success:function(data){
+        //         console.log(data);
+        //     }
+        // });
+        //ajax:url,请求的类型,成功的回调函数
+
+        // var xhr = new XMLHttpRequest();//创造出来一台手机
+        // xhr.open("GET",'./a.json');//拨号
+        // //打电话
+        // xhr.send();
+        // xhr.onreadystatechange = function(){
+        //     //只有请求状态是4,状态码是200
+        //     if(xhr.readyState === 4 && xhr.status === 200){
+        //         console.log(JSON.parse(xhr.responseText));
+        //     }
+        // }
+
+        // $.get('./a.json',function(data){
+        //     console.log(data);
+        // },'json');
+
+        // $.getJSON('./a.json',function(data){
+        //     console.log(data);
+        //     $.getJSON('./b.php' +　data.str,function(){
+        //         $.getJSON
+        //     });
+        // });
+
+
+        // 不重要的东西 --> 构造第二次请求 --> 构造第三次请求
+
+
+        // 'wfeowhefowefhwoefwfe' + 请求 --> 
+
+
+        // $.getJSON('./a.json').then(function(data){
+        //     console.log(data);
+        // });
+        
+
+        // fetch('./a.json',{method:'get'}).then(function(response){
+        //     response.json().then(function(data){
+        //         console.log(data);
+        //     })
+        // });
+
+
+        // 跨域：域名、端口、协议只要一个不一样，就是跨域
+
+
+        // file://
+        // http://
+
+        // http://localhost:80
+        // http://localhost:8080
+
+        // http://baidu.com
+        // http://sina.com.cn
+
+        // $.ajax({
+        //     url:'http://localhost/jsonp.php',
+        //     type:'GET',
+        //     dataType:'jsonp',
+        //     success:function(data){
+        //         console.log(data);
+        //     }
+        // });
+
+        //如果是jsonp，只需要多一个?callback=?
+        // $.getJSON('http://localhost/jsonp.php?callback=?',function(data){
+        //     console.log(data);
+        // });
+
+        //用原生js来实现jsonp --> jquery内部定义了一个方法名叫jQuery32109351228583845106_1493898132111的函数
+        function jQuery32103793485027164136_1493898377142(data){
+            console.log(data);
+        }
+
+        // jQuery32109351228583845106_1493898132111({"school":"heima","subject":"frontend"})
+
+    </script>  
+    <!--<script src="http://localhost/jsonp.php?callback=jQuery32103793485027164136_1493898377142"></script>-->
+
+
+    <script>
+        function fn(url,fn){
+            // function abc(data){
+            //     console.log(data);
+            // }
+
+            var fnName = 'abc';
+
+            window[fnName] = fn;
+
+            var oScript = document.createElement('script');
+            oScript.src = url + '?callback=' + fnName;
+            //游离状态 --> 追加到DOM树上
+            document.body.appendChild(oScript);
+        }
+
+        fn('http://localhost/jsonp.php',function(data){
+            console.log(data);//先测下数据没问题  --> DOM操作
+
+        });
+
+
+    </script> 
+    <!--<script>
+        abc({"school":"heima","subject":"frontend"})
+    </script>-->
+</body>
+</html>
